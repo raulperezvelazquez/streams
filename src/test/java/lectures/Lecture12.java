@@ -13,8 +13,11 @@ public class Lecture12 {
     List<String> emails = MockData.getPeople()
         .stream()
         .map(Person::getEmail)
-        .collect(Collectors.toList());
-
+        .collect(
+            ArrayList::new,
+            (List<String> list, String element) -> list.add(element),
+            (List<String> list1, List<String> list2) -> list1.addAll(list2)
+        );
     emails.forEach(System.out::println);
   }
 }
